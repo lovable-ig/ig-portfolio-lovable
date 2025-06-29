@@ -170,7 +170,7 @@ const Experience = () => {
             {services.map((service, index) => (
               <div
                 key={index}
-                className={`group bg-foreground bg-opacity-5 border border-foreground border-opacity-10 rounded-2xl p-6 backdrop-blur-sm hover:bg-opacity-10 hover:border-opacity-20 transition-all duration-500 ${
+                className={`group bg-opacity-5 border border-foreground border-opacity-10 rounded-2xl p-6 backdrop-blur-sm hover:bg-opacity-10 hover:border-opacity-20 transition-all duration-500 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
                 style={{ transitionDelay: `${(index + 4) * 200}ms` }}

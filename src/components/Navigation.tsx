@@ -65,7 +65,7 @@ const Navigation = () => {
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`text-sm tracking-wider transition-all duration-300 hover:text-opacity-70 relative ${
+                    className={`navigation-link text-sm tracking-wider transition-all duration-300 hover:text-opacity-70 relative ${
                       activeSection === item.id ? 'text-foreground' : 'text-foreground text-opacity-60'
                     }`}
                   >
@@ -108,7 +108,7 @@ const Navigation = () => {
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`text-xl tracking-wider transition-all duration-300 hover:text-opacity-70 ${
+              className={`navigation-link text-xl tracking-wider transition-all duration-300 hover:text-opacity-70 ${
                 isOpen ? 'animate-fade-in' : ''
               }`}
               style={{ animationDelay: `${index * 100}ms` }}

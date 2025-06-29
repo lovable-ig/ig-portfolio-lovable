@@ -1,25 +1,18 @@
-
 import { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const Hero = () => {
-  const [displayText, setDisplayText] = useState('');
-  const [isTypingComplete, setIsTypingComplete] = useState(false);
-  const fullText = 'ITTEBA GILANI';
+  const [isLoaded, setIsLoaded] = useState(false);
+  const { isDark } = useTheme();
 
   useEffect(() => {
-    let currentIndex = 0;
-    const typingInterval = setInterval(() => {
-      if (currentIndex <= fullText.length) {
-        setDisplayText(fullText.slice(0, currentIndex));
-        currentIndex++;
-      } else {
-        clearInterval(typingInterval);
-        setIsTypingComplete(true);
-      }
+    // Simple delay to trigger animations
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
     }, 100);
 
-    return () => clearInterval(typingInterval);
+    return () => clearTimeout(timer);
   }, []);
 
   const scrollToAbout = () => {
@@ -39,15 +32,16 @@ const Hero = () => {
       </div>
 
       <div className="text-center z-10">
-        {/* Main heading with typing animation */}
-        <h1 className="text-5xl md:text-8xl font-bold tracking-wider mb-6 font-playfair">
-          {displayText}
-          <span className="animate-pulse">|</span>
+        {/* Main heading with fade-in animation */}
+        <h1 className={`text-5xl md:text-8xl font-light tracking-wider mb-6 font-playfair transition-all duration-1000 ${
+          isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
+          ITTEBA GILANI
         </h1>
 
         {/* Subtitle with fade-in animation */}
-        <div className={`transition-all duration-1000 ${
-          isTypingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        <div className={`transition-all duration-1000 delay-300 ${
+          isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
         }`}>
           <p className="text-xl md:text-2xl text-foreground text-opacity-70 tracking-wide mb-4">
             Creative Developer & Designer
@@ -59,11 +53,13 @@ const Hero = () => {
 
         {/* CTA Button */}
         <div className={`mt-12 transition-all duration-1000 delay-500 ${
-          isTypingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+          isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
         }`}>
           <button 
             onClick={scrollToAbout}
-            className="group bg-foreground bg-opacity-5 border border-foreground border-opacity-20 px-8 py-3 rounded-full hover:bg-opacity-10 transition-all duration-300 backdrop-blur-sm"
+            className={`group bg-foreground bg-opacity-5 border border-foreground border-opacity-20 px-8 py-3 rounded-full hover:bg-opacity-10 transition-all duration-300 backdrop-blur-sm ${
+              isDark ? 'text-black' : 'text-white'
+            }`}
           >
             <span className="text-sm tracking-wider">Explore My Work</span>
           </button>
@@ -71,8 +67,8 @@ const Hero = () => {
       </div>
 
       {/* Scroll indicator */}
-      <div className={`absolute bottom-8 transition-all duration-1000 delay-1000 ${
-        isTypingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+      <div className={`absolute bottom-8 transition-all duration-1000 delay-700 ${
+        isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}>
         <button 
           onClick={scrollToAbout}
