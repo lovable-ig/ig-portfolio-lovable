@@ -94,104 +94,102 @@ const Experience = () => {
 
   return (
     <section id="experience" className="min-h-screen py-20 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* Experience Timeline */}
-          <div>
-            <div className={`mb-12 transition-all duration-1000 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}>
-              <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-wide">
-                EXPERIENCE
-              </h2>
-              <p className="text-gray-400 text-lg">
-                A journey through creative and technical challenges that shaped my expertise.
-              </p>
-            </div>
-
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-white via-gray-600 to-transparent opacity-30"></div>
-
-              {experiences.map((exp, index) => (
-                <div
-                  key={index}
-                  className={`relative mb-12 transition-all duration-700 ${
-                    isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
-                  }`}
-                  style={{ transitionDelay: `${index * 200}ms` }}
-                >
-                  {/* Timeline dot */}
-                  <div className="absolute left-4 w-4 h-4 bg-white rounded-full border-4 border-black"></div>
-                  
-                  {/* Content */}
-                  <div className="ml-16">
-                    <div className="text-sm text-gray-400 tracking-wider mb-2">
-                      {exp.year}
-                    </div>
-                    <h3 className="text-xl font-semibold mb-1">
-                      {exp.title}
-                    </h3>
-                    <div className="text-gray-300 mb-3">
-                      {exp.company}
-                    </div>
-                    <p className="text-gray-400 mb-4 leading-relaxed">
-                      {exp.description}
-                    </p>
-                    
-                    {/* Achievements */}
-                    <ul className="space-y-1">
-                      {exp.achievements.map((achievement, achIndex) => (
-                        <li key={achIndex} className="text-sm text-gray-500 flex items-start">
-                          <span className="w-1 h-1 bg-gray-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                          {achievement}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              ))}
-            </div>
+      <div className="max-w-4xl mx-auto">
+        {/* Experience Timeline */}
+        <div className="mb-20">
+          <div className={`mb-12 transition-all duration-1000 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-wide font-playfair">
+              EXPERIENCE
+            </h2>
+            <p className="text-foreground text-opacity-60 text-lg">
+              A journey through creative and technical challenges that shaped my expertise.
+            </p>
           </div>
 
-          {/* Services */}
-          <div>
-            <div className={`mb-12 transition-all duration-1000 delay-300 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}>
-              <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-wide">
-                SERVICES
-              </h2>
-              <p className="text-gray-400 text-lg">
-                Comprehensive solutions tailored to your creative and technical needs.
-              </p>
-            </div>
+          <div className="relative">
+            {/* Timeline line */}
+            <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-foreground via-foreground to-transparent opacity-30"></div>
 
-            <div className="space-y-6">
-              {services.map((service, index) => (
-                <div
-                  key={index}
-                  className={`group bg-white bg-opacity-5 border border-white border-opacity-10 rounded-2xl p-6 backdrop-blur-sm hover:bg-opacity-10 hover:border-opacity-20 transition-all duration-500 ${
-                    isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-                  }`}
-                  style={{ transitionDelay: `${(index + 2) * 200}ms` }}
-                >
-                  <div className="flex items-start space-x-4">
-                    <div className="text-2xl font-bold text-gray-600 group-hover:text-gray-400 transition-colors duration-300">
-                      {service.icon}
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-semibold mb-2 group-hover:text-gray-300 transition-colors duration-300">
-                        {service.title}
-                      </h3>
-                      <p className="text-gray-400 leading-relaxed">
-                        {service.description}
-                      </p>
-                    </div>
+            {experiences.map((exp, index) => (
+              <div
+                key={index}
+                className={`relative mb-12 transition-all duration-700 ${
+                  isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+                }`}
+                style={{ transitionDelay: `${index * 200}ms` }}
+              >
+                {/* Timeline dot */}
+                <div className="absolute left-4 w-4 h-4 bg-foreground rounded-full border-4 border-background"></div>
+                
+                {/* Content */}
+                <div className="ml-16">
+                  <div className="text-sm text-foreground text-opacity-60 tracking-wider mb-2">
+                    {exp.year}
+                  </div>
+                  <h3 className="text-xl font-semibold mb-1">
+                    {exp.title}
+                  </h3>
+                  <div className="text-foreground text-opacity-70 mb-3">
+                    {exp.company}
+                  </div>
+                  <p className="text-foreground text-opacity-60 mb-4 leading-relaxed">
+                    {exp.description}
+                  </p>
+                  
+                  {/* Achievements */}
+                  <ul className="space-y-1">
+                    {exp.achievements.map((achievement, achIndex) => (
+                      <li key={achIndex} className="text-sm text-foreground text-opacity-50 flex items-start">
+                        <span className="w-1 h-1 bg-foreground bg-opacity-50 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                        {achievement}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Services */}
+        <div>
+          <div className={`mb-12 transition-all duration-1000 delay-300 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-wide font-playfair">
+              SERVICES
+            </h2>
+            <p className="text-foreground text-opacity-60 text-lg">
+              Comprehensive solutions tailored to your creative and technical needs.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className={`group bg-foreground bg-opacity-5 border border-foreground border-opacity-10 rounded-2xl p-6 backdrop-blur-sm hover:bg-opacity-10 hover:border-opacity-20 transition-all duration-500 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+                style={{ transitionDelay: `${(index + 4) * 200}ms` }}
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="text-2xl font-bold text-foreground text-opacity-60 group-hover:text-opacity-40 transition-colors duration-300">
+                    {service.icon}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold mb-2 group-hover:text-opacity-70 transition-colors duration-300">
+                      {service.title}
+                    </h3>
+                    <p className="text-foreground text-opacity-60 leading-relaxed">
+                      {service.description}
+                    </p>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

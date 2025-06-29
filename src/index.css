@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -48,6 +48,45 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 0 0% 95%;
     --sidebar-border: 0 0% 20%;
     --sidebar-ring: 0 0% 83.1%;
+  }
+
+  .light {
+    --background: 0 0% 98%;
+    --foreground: 0 0% 3%;
+
+    --card: 0 0% 95%;
+    --card-foreground: 0 0% 3%;
+
+    --popover: 0 0% 95%;
+    --popover-foreground: 0 0% 3%;
+
+    --primary: 0 0% 3%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 90%;
+    --secondary-foreground: 0 0% 3%;
+
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 0 0% 90%;
+    --accent-foreground: 0 0% 3%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 80%;
+    --input: 0 0% 80%;
+    --ring: 0 0% 16.9%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 5%;
+    --sidebar-primary: 0 0% 3%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 0 0% 90%;
+    --sidebar-accent-foreground: 0 0% 5%;
+    --sidebar-border: 0 0% 80%;
+    --sidebar-ring: 0 0% 16.9%;
   }
 
   .dark {
@@ -105,6 +144,11 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
+  /* Custom font families */
+  .font-playfair {
+    font-family: 'Playfair Display', serif;
+  }
+
   /* Custom animations */
   @keyframes fade-in {
     from {
@@ -203,6 +247,19 @@ All colors MUST be HSL.
     background: rgba(255, 255, 255, 0.3);
   }
 
+  /* Light theme scrollbar */
+  .light ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .light ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .light ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
   /* Selection styling */
   ::selection {
     background: rgba(255, 255, 255, 0.2);
@@ -212,6 +269,16 @@ All colors MUST be HSL.
   ::-moz-selection {
     background: rgba(255, 255, 255, 0.2);
     color: white;
+  }
+
+  .light ::selection {
+    background: rgba(0, 0, 0, 0.2);
+    color: black;
+  }
+
+  .light ::-moz-selection {
+    background: rgba(0, 0, 0, 0.2);
+    color: black;
   }
 }
 
@@ -241,4 +308,11 @@ input:focus-visible,
 textarea:focus-visible {
   outline: 2px solid rgba(255, 255, 255, 0.5);
   outline-offset: 2px;
+}
+
+.light button:focus-visible,
+.light a:focus-visible,
+.light input:focus-visible,
+.light textarea:focus-visible {
+  outline: 2px solid rgba(0, 0, 0, 0.5);
 }
