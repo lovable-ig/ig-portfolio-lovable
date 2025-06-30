@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
@@ -6,6 +5,8 @@ import { useTheme } from '../contexts/ThemeContext';
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const { isDark, toggleTheme } = useTheme();
 
   const navItems = [
@@ -18,8 +19,21 @@ const Navigation = () => {
 
   useEffect(() => {
     const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Hide/show navbar logic
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down and past 100px
+        setIsVisible(false);
+      } else if (currentScrollY < lastScrollY || currentScrollY <= 100) {
+        // Scrolling up or at the top
+        setIsVisible(true);
+      }
+      setLastScrollY(currentScrollY);
+
+      // Active section logic
       const sections = navItems.map(item => document.getElementById(item.id));
-      const scrollPosition = window.scrollY + 100;
+      const scrollPosition = window.scrollY + 200;
 
       sections.forEach((section, index) => {
         if (section) {
@@ -33,11 +47,11 @@ const Navigation = () => {
       });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY, navItems]);
 
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -47,9 +61,11 @@ const Navigation = () => {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background bg-opacity-90 backdrop-blur-sm border-b border-foreground border-opacity-10 transition-colors duration-300">
-        <div className="max-w-4xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
+      <nav className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ease-in-out ${
+        isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+      }`}>
+        <div className="bg-background bg-opacity-90 backdrop-blur-md border border-foreground border-opacity-20 rounded-full px-6 py-3 shadow-lg">
+          <div className="flex items-center justify-between max-w-2xl mx-auto">
             {/* Logo */}
             <button 
               onClick={() => scrollToSection('hero')}
@@ -59,13 +75,13 @@ const Navigation = () => {
             </button>
 
             {/* Centered Desktop Navigation */}
-            <div className="hidden md:flex items-center justify-center flex-1">
-              <div className="flex space-x-8">
+            <div className="hidden md:flex items-center justify-center flex-1 mx-8">
+              <div className="flex space-x-6">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`navigation-link text-sm tracking-wider transition-all duration-300 hover:text-opacity-70 relative ${
+                    className={`navigation-link text-sm tracking-wider transition-all duration-300 hover:text-opacity-70 relative px-3 py-1 ${
                       activeSection === item.id ? 'text-foreground' : 'text-foreground text-opacity-60'
                     }`}
                   >
@@ -79,20 +95,20 @@ const Navigation = () => {
             </div>
 
             {/* Theme Toggle and Mobile Menu */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
               <button
                 onClick={toggleTheme}
                 className="p-2 hover:bg-foreground hover:bg-opacity-10 rounded-full transition-colors duration-300"
                 aria-label="Toggle theme"
               >
-                {isDark ? <Sun size={18} /> : <Moon size={18} />}
+                {isDark ? <Sun size={16} /> : <Moon size={16} />}
               </button>
               
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="md:hidden p-2 hover:bg-foreground hover:bg-opacity-10 rounded-full transition-colors duration-300"
               >
-                {isOpen ? <X size={20} /> : <Menu size={20} />}
+                {isOpen ? <X size={18} /> : <Menu size={18} />}
               </button>
             </div>
           </div>

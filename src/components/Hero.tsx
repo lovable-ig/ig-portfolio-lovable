@@ -33,7 +33,7 @@ const Hero = () => {
 
       <div className="text-center z-10">
         {/* Main heading with fade-in animation */}
-        <h1 className={`text-5xl md:text-8xl font-light tracking-wider mb-6 font-playfair transition-all duration-1000 ${
+        <h1 className={`text-5xl md:text-9xl font-thin tracking-widest mb-6 transition-all duration-1000 ${
           isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
           ITTEBA GILANI
@@ -43,12 +43,10 @@ const Hero = () => {
         <div className={`transition-all duration-1000 delay-300 ${
           isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
         }`}>
-          <p className="text-xl md:text-2xl text-foreground text-opacity-70 tracking-wide mb-4">
+          <p className="text-xl md:text-2xl text-foreground text-opacity-70 tracking-wide mb-4 lowercase">
             Creative Developer & Designer
           </p>
-          <p className="text-sm md:text-base text-foreground text-opacity-50 max-w-2xl mx-auto leading-relaxed">
-            Crafting exceptional digital experiences through innovative design and cutting-edge development
-          </p>
+         
         </div>
 
         {/* CTA Button */}

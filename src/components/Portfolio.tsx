@@ -1,10 +1,10 @@
-
 import { useState, useEffect } from 'react';
 import { ExternalLink, ChevronRight } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const Portfolio = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  const { isDark } = useTheme();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -29,10 +29,10 @@ const Portfolio = () => {
       id: 1,
       title: 'E-Commerce Platform',
       category: 'Web Development',
-      description: 'A modern, responsive e-commerce platform built with React and Node.js, featuring real-time inventory management and seamless payment integration.',
+      description: 'A modern e-commerce platform built with React and Node.js, featuring real-time inventory management and seamless payment integration.',
       technologies: ['React', 'TypeScript', 'Node.js', 'MongoDB'],
       image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
-      link: '#'
+      link: '/e-commerce-platform'
     },
     {
       id: 2,
@@ -41,7 +41,7 @@ const Portfolio = () => {
       description: 'Complete brand identity redesign for a tech startup, including logo design, color palette, typography, and brand guidelines.',
       technologies: ['Figma', 'Adobe Creative Suite', 'Brand Strategy'],
       image: 'https://images.unsplash.com/photo-1496307653780-42ee777d4833?w=800&h=600&fit=crop',
-      link: '#'
+      link: '/brand-identity-system'
     },
     {
       id: 3,
@@ -50,7 +50,7 @@ const Portfolio = () => {
       description: 'User-centered design for a mobile banking application, focusing on security, accessibility, and seamless user experience.',
       technologies: ['React Native', 'Figma', 'User Research'],
       image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800&h=600&fit=crop',
-      link: '#'
+      link: '/mobile-banking-app'
     },
     {
       id: 4,
@@ -59,9 +59,16 @@ const Portfolio = () => {
       description: 'Custom portfolio website with advanced animations, CMS integration, and optimized performance across all devices.',
       technologies: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
       image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=600&fit=crop',
-      link: '#'
+      link: '/portfolio-website'
     }
   ];
+
+  const handleProjectClick = (link) => {
+    // In a real app, you'd use Next.js router or React Router
+    // For now, this is a placeholder
+    console.log(`Navigating to: ${link}`);
+    // window.location.href = link; // Uncomment this in a real app
+  };
 
   return (
     <section id="portfolio" className="min-h-screen py-20 px-6">
@@ -70,10 +77,10 @@ const Portfolio = () => {
         <div className={`mb-16 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-wide">
+          <h2 className="text-4xl md:text-6xl font-light mb-6 tracking-widest">
             SELECTED WORK
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl">
+          <p className={`text-${isDark ? "gray-300" : "gray-600"} text-lg max-w-2xl`}>
             A curated collection of recent projects showcasing my expertise in 
             design, development, and creative problem-solving.
           </p>
@@ -88,7 +95,7 @@ const Portfolio = () => {
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${index * 200}ms` }}
-              onClick={() => setSelectedProject(selectedProject === project.id ? null : project.id)}
+              onClick={() => handleProjectClick(project.link)}
             >
               {/* Project Card */}
               <div className="bg-white bg-opacity-5 border border-white border-opacity-10 rounded-2xl overflow-hidden backdrop-blur-sm hover:bg-opacity-10 hover:border-opacity-20 transition-all duration-500">
@@ -115,34 +122,34 @@ const Portfolio = () => {
                     <span className="text-xs tracking-wider text-gray-400 uppercase">
                       {project.category}
                     </span>
-                    <ChevronRight className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${
-                      selectedProject === project.id ? 'rotate-90' : ''
-                    }`} />
+                    <ChevronRight className="w-5 h-5 text-gray-400 transition-transform duration-300 group-hover:translate-x-1" />
                   </div>
                   
                   <h3 className="text-xl font-semibold mb-3 group-hover:text-gray-300 transition-colors duration-300">
                     {project.title}
                   </h3>
                   
-                  {/* Expandable Description */}
-                  <div className={`overflow-hidden transition-all duration-500 ${
-                    selectedProject === project.id ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                  }`}>
-                    <p className="text-gray-400 mb-4 leading-relaxed">
-                      {project.description}
-                    </p>
-                    
-                    {/* Technologies */}
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech) => (
-                        <span 
-                          key={tech}
-                          className="text-xs px-3 py-1 bg-white bg-opacity-10 border border-white border-opacity-20 rounded-full tracking-wide"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+                  {/* Description */}
+                  <p className="text-gray-400 mb-4 leading-relaxed">
+                    {project.description}
+                  </p>
+                  
+                  {/* Technologies - Now always visible */}
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.map((tech) => (
+                      <span 
+                        key={tech}
+                        className="text-xs px-3 py-1 bg-white bg-opacity-10 border border-white border-opacity-20 rounded-full tracking-wide"
+                        
+                        className={`px-2.5 py-0.5 text-xs font-semibold rounded-full ${
+                          isDark
+                            ? 'bg-white text-white border-white bg-opacity-10'
+                            : 'bg-black text-gray-600 border-gray-300 bg-opacity-10'
+                        }`}
+                      >
+                        {tech}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
