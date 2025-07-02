@@ -112,7 +112,7 @@ const About = () => {
             <div className="relative aspect-square max-w-md mx-auto">
               {/* Profile image placeholder - replace with actual image */}
               <div className="w-full h-full border-white border-opacity-10 flex items-center justify-center">
-                <img src="me.jpg" alt="Profile" className=""/>
+                <img src="me.png" alt="Profile" className=""/>
               </div>
             </div>
           </div>

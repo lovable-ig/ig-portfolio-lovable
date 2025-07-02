@@ -39,23 +39,22 @@ const Experience = () => {
       title: "C++ Teaching Assistant",
       company: "McMaster University",
       description:
-        "Developed and maintained complex web applications using modern frameworks and technologies, with a focus on performance and user experience.",
+        "Facilitated learning and provided academic support for undergraduate computer science students in C++ programming courses.",
       achievements: [
-        "Built scalable applications serving 100k+ users",
-        "Reduced load times by 60% through optimization",
-        "Implemented automated testing protocols",
+        "Conducted weekly tutorial sessions for 30+ students, improving class comprehension scores by 20%",
+        "Provided one-on-one coding assistance and debugging support for students during office hours",        "Graded assignments and exams for 150+ students, ensuring consistent evaluation standards and timely feedback",
       ],
     },
     {
-      year: "2018 - 2019",
-      title: "Frontend Developer",
-      company: "Startup Hub",
+      year: "Dec 2023 - Jan 2024",
+      title: "Fullstack Developer",
+      company: "Startup (Failed)",
       description:
-        "Focused on frontend development and responsive design implementation, working closely with designers to bring creative visions to life.",
+        "Developed and maintained web applications across the full technology stack in a fast-paced startup environment.",
       achievements: [
-        "Developed mobile-first responsive websites",
-        "Collaborated with cross-functional teams",
-        "Implemented modern CSS and JavaScript techniques",
+        "Implemented a website for a hiring agency using NextJS, resulting in a responsive and user-friendly interface that improved conversion rate by 0.8%",
+        "Utilized OpenAI to create a chatbot that answers inquiries in real time, providing visitors with 24/7 support",
+        "Integrated a backend infrastructure with an admin interface to manage users and track visitors, allowing for customer insights",
       ],
     },
   ];

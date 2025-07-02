@@ -6,10 +6,11 @@ import Portfolio from '../components/Portfolio';
 import Experience from '../components/Experience';
 import Contact from '../components/Contact';
 import Navigation from '../components/Navigation';
-import { ThemeProvider } from '../contexts/ThemeContext';
+import { ThemeProvider, useTheme } from '../contexts/ThemeContext';
 
 const IndexContent = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const  { isDark } = useTheme();
 
   useEffect(() => {
     // Simulate loading time for smooth entrance
@@ -47,15 +48,29 @@ const IndexContent = () => {
 
       {/* Scroll to top indicator */}
       <div className="fixed bottom-8 right-8 z-50">
-        <button 
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="w-12 h-12 bg-foreground bg-opacity-10 backdrop-blur-sm border border-foreground border-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-20 transition-all duration-300 group"
-        >
-          <svg className="w-5 h-5 text-foreground group-hover:transform group-hover:-translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-          </svg>
-        </button>
-      </div>
+  <button 
+    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+    className={`w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-sm border transition-all duration-300 group
+      ${isDark 
+        ? "bg-white bg-opacity-5 border-white border-opacity-10 hover:border-opacity-20" 
+        : "bg-black bg-opacity-5 border-black border-opacity-10 hover:bg-opacity-10 hover:border-opacity-20"
+      }`}
+  >
+    <svg 
+      className={`w-5 h-5 transition-transform duration-300 group-hover:-translate-y-1 
+        ${isDark 
+          ? "text-white group-hover:text-white" 
+          : "text-black group-hover:text-black"
+        }`}
+      fill="none" 
+      stroke="currentColor" 
+      viewBox="0 0 24 24"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  </button>
+</div>
+
     </div>
   );
 };
